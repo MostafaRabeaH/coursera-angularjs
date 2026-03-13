@@ -62,7 +62,9 @@ function ShoppingListCheckOffService() {
   };
 
   service.removeItemFromBought = function (itemIndex) {
+    var item = boughtItems[itemIndex];
     boughtItems.splice(itemIndex, 1);
+    toBuyItems.push(item);
   };
 }
 
