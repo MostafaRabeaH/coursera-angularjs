@@ -14,12 +14,20 @@ function ToBuyController(ShoppingListCheckOffService) {
   toBuy.buyItem = function (itemIndex) {
     ShoppingListCheckOffService.buyItem(itemIndex);
   };
+
+  toBuy.remove = function (itemIndex) {
+    ShoppingListCheckOffService.removeItemFromToBuy(itemIndex);
+  };
 }
 
 AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
 function AlreadyBoughtController(ShoppingListCheckOffService) {
   var bought = this;
   bought.items = ShoppingListCheckOffService.getBoughtItems();
+
+  bought.remove = function (itemIndex) {
+    ShoppingListCheckOffService.removeItemFromBought(itemIndex);
+  };
 }
 
 function ShoppingListCheckOffService() {
@@ -47,6 +55,14 @@ function ShoppingListCheckOffService() {
 
   service.getBoughtItems = function () {
     return boughtItems;
+  };
+
+  service.removeItemFromToBuy = function (itemIndex) {
+    toBuyItems.splice(itemIndex, 1);
+  };
+
+  service.removeItemFromBought = function (itemIndex) {
+    boughtItems.splice(itemIndex, 1);
   };
 }
 
